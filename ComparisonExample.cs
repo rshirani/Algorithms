@@ -15,6 +15,25 @@ class Program
 
 public class Solution
 {
+    public string[] FindRelativeRanksUsingDictionary(int[] nums)
+    {
+        int length = nums.Length;
+        SortedDictionary<int, int> dic = new SortedDictionary<int, int>();
+        String[] ans = new String[length];
+        for(int i = 0; i< length; i++) dic.Add(nums[i], i);
+
+        for(int i = dic.Count-1; i >= 0; i--)
+        {
+            KeyValuePair<int,int> kv = dic.ElementAtOrDefault(i);
+            if (i == length - 1) ans[kv.Value] = "Gold Medal";
+            else if(i== length - 2) ans[kv.Value] = "Silver Medal";
+            else if (i == length - 3) ans[kv.Value] = "Bronze Medal";
+            else ans[kv.Value] = (length - i).ToString();
+        }
+
+        return ans;
+    }
+    
     public string[] FindRelativeRanks(int[] nums)
     {
         List<User> list = new List<User>();
